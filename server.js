@@ -28,6 +28,8 @@ app.use("/", express.static(path.join(__dirname, "/public")));
 
 app.use("/", require("./routes/root"));
 
+app.use("/users", require("./routes/userRoutes"));
+app.use("/notes", require("./routes/noteRoutes"));
 app.all("*", (req, res) => {
   res.status(404);
   if (req.accepts("html")) {
@@ -38,11 +40,13 @@ app.all("*", (req, res) => {
     res.type("txt").send("404 not Found");
   }
 });
+
 app.use(errorHandler);
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDb");
   app.listen(PORT, () => console.log(`Server is running on port ${PORT} `));
 });
+
 mongoose.connection.on("error", (err) => {
   console.log(err);
   logEvents(

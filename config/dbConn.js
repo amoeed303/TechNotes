@@ -9,3 +9,8 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+//db details
+//pass:testing 123
+//projname:MongoTechNotes
+//dbname:TechNote
+//user:employee
